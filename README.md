@@ -69,35 +69,4 @@ query-copilot/
 ```
 
 ### 💡 Credits
-Built with ❤️ by Aravindh — LinkedIn | GitHub
-
-
----
-
-## ✅ `.gitignore`
-
-```gitignore
-# Python
-__pycache__/
-*.py[cod]
-*.env
-
-# Docker
-*.log
-.env
-
-# Streamlit
-.streamlit/
-
-# Terraform
-.terraform/
-*.tfstate
-*.tfstate.*
-
-# VSCode
-.vscode/
-
-# OS Files
-.DS_Store
-Thumbs.db
-```
+Built with ❤️ by Aravindh — LinkedIn[https://www.linkedin.com/in/aravindhkumar-m1997/] | GitHub[https://github.com/aravindhm97]
