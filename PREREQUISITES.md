@@ -74,10 +74,10 @@ aws configure
 ```
 Enter the following:
 
-- AWS Access Key ID: (Get it from AWS IAM Console)
-- AWS Secret Access Key: (Get it from AWS IAM Console)
-- Default region name: ap-south-1 (or your preferred region)
-- Default output format: json
+- **AWS Access Key ID:** (Get it from AWS IAM Console)
+- **AWS Secret Access Key:** (Get it from AWS IAM Console)
+- **Default region name:** `ap-south-1` (or your preferred region)
+- **Default output format:** `json`
 
 Verify by running:
 ```bash
@@ -97,7 +97,7 @@ python --version
 pip --version
 ```
 
-## 7. **Streamlit* 🎨 (Frontend UI)
+## 7. **Streamlit** 🎨 (Frontend UI)
 **Streamlit** is used for the frontend interface, which allows users to interact with the application via a web UI.
 
 Install Streamlit using `pip` (Python package manager):
