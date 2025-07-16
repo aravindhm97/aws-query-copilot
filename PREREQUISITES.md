@@ -108,3 +108,6 @@ Verify by running:
 ```bash
 streamlit --version
 ```
+
+- Athena workgroup: `query-copilot-wg`
+- Query results: `S3 bucket query-copilot-demo-bucket`
