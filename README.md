@@ -32,8 +32,8 @@ terraform init
 terraform apply
 ```
 
-- Athena workgroup: query-copilot-wg
-- Query results: S3 bucket query-copilot-demo-bucket
+- Athena workgroup: `query-copilot-wg`
+- Query results: `S3 bucket query-copilot-demo-bucket`
 
 ### 📝 Example Prompts
 - "Top 10 customers by purchase volume last quarter"
@@ -41,7 +41,7 @@ terraform apply
 - "Revenue by region for 2023"
 
 ### 🔐 Env Variables
-Create a .env file inside backend/ with:
+Create a `.env` file inside `backend/` with:
 ```bash
 HUGGINGFACE_API_TOKEN=your_token_here
 (Free token from https://huggingface.co/settings/tokens)
@@ -70,5 +70,3 @@ query-copilot/
 
 ### 💡 Credits
 Built with ❤️ by Aravindh — [LinedIn](https://www.linkedin.com/in/aravindhkumar-m1997/) | [GitHub](https://github.com/aravindhm97)
-
-The background color is `#ffffff` for light mode and `#000000` for dark mode.
