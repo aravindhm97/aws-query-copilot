@@ -22,8 +22,8 @@ cd query-copilot
 docker-compose up --build
 ```
 
--Frontend: http://localhost:8501
--Backend (FastAPI docs): http://localhost:8000/docs
+- Frontend: http://localhost:8501
+- Backend (FastAPI docs): http://localhost:8000/docs
 
 ## ☁️ AWS Infrastructure Deployment (Terraform)
 ```bash
@@ -31,5 +31,73 @@ cd terraform
 terraform init
 terraform apply
 ```
--Athena workgroup: query-copilot-wg
--Query results: S3 bucket query-copilot-demo-bucket
+
+- Athena workgroup: query-copilot-wg
+- Query results: S3 bucket query-copilot-demo-bucket
+
+### 📝 Example Prompts
+- "Top 10 customers by purchase volume last quarter"
+- "Orders from Bangalore in the last 7 days"
+- "Revenue by region for 2023"
+
+### 🔐 Env Variables
+Create a .env file inside backend/ with:
+```bash
+HUGGINGFACE_API_TOKEN=your_token_here
+(Free token from https://huggingface.co/settings/tokens)
+```
+
+### 📁 Project Structure
+```bash
+query-copilot/
+├── backend/
+│   ├── api.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── .env
+├── frontend/
+│   ├── streamlit_app.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── .env
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── terraform.tfvars
+│   └── outputs.tf
+└── docker-compose.yml
+```
+
+### 💡 Credits
+Built with ❤️ by Aravindh — LinkedIn | GitHub
+
+
+---
+
+## ✅ `.gitignore`
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.env
+
+# Docker
+*.log
+.env
+
+# Streamlit
+.streamlit/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# VSCode
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+```
