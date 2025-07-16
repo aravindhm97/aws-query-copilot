@@ -36,9 +36,9 @@ git --version
 **Hugging Face** is used for the AI model (`defog/sqlcoder-7b-2`) that translates plain English into SQL.
 
 ### How to Install:
--1. Go to [Hugging Face Account Settings](https://huggingface.co/settings/tokens).
--2. Create a new token under Access Tokens.
--3. Copy the token and save it.
+1. Go to [Hugging Face Account Settings](https://huggingface.co/settings/tokens).
+2. Create a new token under Access Tokens.
+3. Copy the token and save it.
 
 ### Setup in the Project:
 Create a `.env` file in the `backend/` folder with the following:
