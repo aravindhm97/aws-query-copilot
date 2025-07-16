@@ -1,0 +1,5 @@
+aws_region = "ap-south-1"
+s3_bucket_name = "querycopilot-demo-datalake"
+athena_database_name = "copilot_db"
+athena_table_name = "events"
+athena_output_location = "s3://querycopilot-demo-datalake/athena_results/"
