@@ -24,7 +24,7 @@ docker-compose --version
 **Git** is used for version control and managing the source code.
 
 ### How to Install:
-- Download Git (for Windows/Mac/Linux)
+- [Download Git](https://git-scm.com/downloads) (for Windows/Mac/Linux)
 - Follow installation instructions for your OS.
 
 Verify by running:
