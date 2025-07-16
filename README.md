@@ -14,6 +14,10 @@
 
 ---
 
+> Before you can run **Query Copilot** locally or deploy it to AWS, check the [prerequisites document](PREREQUISITES.md) and verify once all the required tools are installed properly.
+
+---
+
 ## 🧪 Local Deployment (Docker Compose)
 
 ```bash
@@ -24,6 +28,8 @@ docker-compose up --build
 
 - Frontend: http://localhost:8501
 - Backend (FastAPI docs): http://localhost:8000/docs
+
+---
 
 ## ☁️ AWS Infrastructure Deployment (Terraform)
 ```bash
