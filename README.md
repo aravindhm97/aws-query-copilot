@@ -70,3 +70,5 @@ query-copilot/
 
 ### 💡 Credits
 Built with ❤️ by Aravindh — LinkedIn[https://www.linkedin.com/in/aravindhkumar-m1997/] | GitHub[https://github.com/aravindhm97]
+
+Link to the second non-unique section: [Link Text](#this-heading-is-not-unique-in-the-file-1).
