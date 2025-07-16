@@ -69,6 +69,6 @@ query-copilot/
 ```
 
 ### 💡 Credits
-Built with ❤️ by Aravindh — LinkedIn: [https://www.linkedin.com/in/aravindhkumar-m1997/](LinedIn) | GitHub: [https://github.com/aravindhm97](GitHub)
+Built with ❤️ by Aravindh — [LinedIn](https://www.linkedin.com/in/aravindhkumar-m1997/) | [GitHub](https://github.com/aravindhm97)
 
 
