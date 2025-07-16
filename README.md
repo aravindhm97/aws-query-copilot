@@ -71,4 +71,4 @@ query-copilot/
 ### 💡 Credits
 Built with ❤️ by Aravindh — [LinedIn](https://www.linkedin.com/in/aravindhkumar-m1997/) | [GitHub](https://github.com/aravindhm97)
 
-
+The background color is `#ffffff` for light mode and `#000000` for dark mode.
