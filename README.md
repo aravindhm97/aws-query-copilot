@@ -19,7 +19,7 @@
 
 ---
 
-> ## 📝 Prerequisites
+> ## 📝 Deployment
 > Please follow the [DEPLOYMENT.md](./DEPLOYMENT.md) file for the step-by-step detailed guide for installation.
 
 ---
