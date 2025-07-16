@@ -14,44 +14,20 @@
 
 ---
 
-> Before you can run **Query Copilot** locally or deploy it to AWS, check the [prerequisites document](PREREQUISITES.md) and verify once all the required tools are installed properly.
+> ## 📝 Prerequisites
+> Please check the [PREREQUISITES.md](./PREREQUISITES.md) file for a step-by-step installation guide on setting up all required tools.
 
 ---
 
-## 🧪 Local Deployment (Docker Compose)
-
-```bash
-git clone https://github.com/your-username/query-copilot.git
-cd query-copilot
-docker-compose up --build
-```
-
-- Frontend: http://localhost:8501
-- Backend (FastAPI docs): http://localhost:8000/docs
+> ## 📝 Prerequisites
+> Please follow the [DEPLOYMENT.md](./DEPLOYMENT.md) file for the step-by-step detailed guide for installation.
 
 ---
-
-## ☁️ AWS Infrastructure Deployment (Terraform)
-```bash
-cd terraform
-terraform init
-terraform apply
-```
-
-- Athena workgroup: `query-copilot-wg`
-- Query results: `S3 bucket query-copilot-demo-bucket`
 
 ### 📝 Example Prompts
 - "Top 10 customers by purchase volume last quarter"
 - "Orders from Bangalore in the last 7 days"
 - "Revenue by region for 2023"
-
-### 🔐 Env Variables
-Create a `.env` file inside `backend/` with:
-```bash
-HUGGINGFACE_API_TOKEN=your_token_here
-(Free token from https://huggingface.co/settings/tokens)
-```
 
 ### 📁 Project Structure
 ```bash
