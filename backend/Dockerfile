@@ -1,23 +1,17 @@
-# Use official Python slim image
+# Use lightweight Python image
 FROM python:3.10-slim
 
-# Set working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy your app code
+# Copy all backend files
 COPY . .
 
-# Expose FastAPI default port
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port (FastAPI default)
 EXPOSE 8000
 
-# Start FastAPI app using uvicorn
+# Start FastAPI app using Uvicorn
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
