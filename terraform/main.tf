@@ -1,54 +1,75 @@
-# main.tf
 provider "aws" {
-  region = var.aws_region
+  region  = "ap-south-1"
   profile = var.aws_profile
 }
 
-module "s3_bucket" {
-  source = "terraform-aws-modules/s3-bucket/aws"
-
+resource "aws_s3_bucket" "querycopilot_bucket" {
   bucket = var.s3_bucket_name
-  acl    = "private"
+  force_destroy = true
+}
 
-  versioning = {
-    enabled = true
+resource "aws_s3_bucket_public_access_block" "querycopilot_block" {
+  bucket = aws_s3_bucket.querycopilot_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_glue_catalog_database" "copilot_db" {
+  name = var.athena_database_name
+}
+
+resource "aws_glue_crawler" "copilot_crawler" {
+  name         = "copilot-crawler"
+  role         = aws_iam_role.athena_access_role.arn
+  database_name = aws_glue_catalog_database.copilot_db.name
+
+  s3_target {
+    path = "s3://${aws_s3_bucket.querycopilot_bucket.bucket}/input-data"
   }
 
-  lifecycle_rule = [
-    {
-      enabled = true
-      expiration = {
-        days = 30
-      }
-    }
-  ]
+  schedule {
+    schedule_expression = "cron(0 12 * * ? *)" # daily
+  }
 
-  tags = {
-    Project = "aws-query-copilot"
+  schema_change_policy {
+    delete_behavior = "LOG"
+    update_behavior = "UPDATE_IN_DATABASE"
   }
 }
 
-resource "aws_iam_role" "athena_exec_role" {
-  name = "query-copilot-athena-role"
+resource "aws_athena_workgroup" "copilot_workgroup" {
+  name = "copilot-workgroup"
+  configuration {
+    enforce_workgroup_configuration = true
+    result_configuration {
+      output_location = var.athena_output_location
+    }
+  }
+}
+
+resource "aws_iam_role" "athena_access_role" {
+  name = "athena-access-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
         Action = "sts:AssumeRole",
-        Principal = {
-          Service = "athena.amazonaws.com"
-        },
         Effect = "Allow",
-        Sid = ""
+        Principal = {
+          Service = "glue.amazonaws.com"
+        }
       }
     ]
   })
 }
 
-resource "aws_iam_role_policy" "athena_exec_policy" {
-  name = "query-copilot-athena-policy"
-  role = aws_iam_role.athena_exec_role.id
+resource "aws_iam_role_policy" "athena_access_policy" {
+  name = "athena-access-policy"
+  role = aws_iam_role.athena_access_role.id
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -61,64 +82,18 @@ resource "aws_iam_role_policy" "athena_exec_policy" {
           "s3:ListBucket"
         ],
         Resource = [
-          "${module.s3_bucket.bucket_arn}/*",
-          module.s3_bucket.bucket_arn
+          "${aws_s3_bucket.querycopilot_bucket.arn}/*",
+          "${aws_s3_bucket.querycopilot_bucket.arn}"
         ]
       },
       {
         Effect = "Allow",
         Action = [
-          "athena:*",
-          "glue:*"
+          "glue:*",
+          "athena:*"
         ],
         Resource = "*"
       }
     ]
   })
-}
-
-resource "aws_glue_catalog_database" "copilot_db" {
-  name = var.athena_db_name
-}
-
-resource "aws_glue_catalog_table" "events_table" {
-  name          = "events"
-  database_name = aws_glue_catalog_database.copilot_db.name
-
-  table_type = "EXTERNAL_TABLE"
-
-  parameters = {
-    "classification" = "json",
-    "compressionType" = "none",
-    "typeOfData"      = "file"
-  }
-
-  storage_descriptor {
-    location      = "s3://${var.s3_bucket_name}/events/"
-    input_format  = "org.apache.hadoop.mapred.TextInputFormat"
-    output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
-
-    ser_de_info {
-      name                  = "events"
-      serialization_library = "org.openx.data.jsonserde.JsonSerDe"
-      parameters = {
-        "serialization.format" = "1"
-      }
-    }
-
-    columns = [
-      {
-        name = "user_id"
-        type = "string"
-      },
-      {
-        name = "event_type"
-        type = "string"
-      },
-      {
-        name = "timestamp"
-        type = "string"
-      }
-    ]
-  }
 }
